@@ -1,0 +1,74 @@
+<!doctype>
+<html>
+   <head>
+      <title>Machine Learning Pipeline</title>
+      <link rel="stylesheet" href="bootstrap.min.css" type="text/css" />
+      <style>
+         .sel_calc_data {
+            text-align:center;
+            margin:auto;
+            display:inline-block;
+            border:#ddd solid 2px;
+            width:100px;
+            height:100px;
+         }
+      </style>
+   </head>
+   <body>
+      <header class="alert alert-info">Machine Learning Pipeline</header>
+      <div id="paper"></div>
+      <div class="container-fluid">
+         <div id="panel_input" class="panel panel-default">
+            <div class="panel-heading">Input Options</div>
+            <div class="panel-body">
+               <div>
+                  <button class="btn btn-success">Upload</button>
+                  <button class="btn btn-default">Export ...</button>
+               </div><br/>
+               <div id="panel_data">
+                  <span class="sel_calc_data">MNIST</span>
+                  <span class="sel_calc_data">CAR-10F</span>
+                  <span class="sel_calc_data">Spiral</span>
+                  <span class="sel_calc_data">Xor</span>
+               </div>
+            </div>
+         </div>
+         <div id="panel_calc" class="panel panel-default">
+            <div class="panel-heading">Hidden Layer Options <button id="btn_calc_remove" class="pull-right btn btn-danger btn-xs">Remove</button></div>
+            <div class="panel-body">
+               <div>
+                  <label>Model</label>
+                  <select id="sel_calc_model" class="form-control">
+                     <option value="linear">Linear</option>
+                  </select>
+               </div>
+               <hr />
+               <div id="panel_model_linear"><table class="table table-striped">
+                  <tr><td style="width:200px;">Activation</td><td>
+                     <select id="sel_calc_linear_activation" class="form-control"><option>tanh</option><option>sigmoid</option><option>relu</option></select>
+                  </td></tr>
+                  <tr><td>Neurons</td><td><input id="txt_calc_linear_neurons" class="form-control" placeholder="4" /></td></tr>
+                  <tr><td>LearningRate</td><td><input id="txt_calc_linear_lrate" class="form-control" placeholder="0.03" /></td></tr>
+               </table></div>
+               <div class="text-right">
+                  <button id="btn_calc_update" class="btn btn-success">Update</button>
+               </div>
+            </div>
+         </div>
+         <div id="panel_output" class="panel panel-default">
+            <div class="panel-heading">Output Options</div>
+            <div class="panel-body">
+               <button id="btn_calc_run" class="btn btn-success">▶ Run</button>
+               <button class="btn btn-default">Stop</button>
+               <button class="btn btn-default">Export ...</button>
+            </div>
+            <div id="result_calc"></div>
+         </div>
+      </div>
+      <div id="mask"></div>
+      <script type="text/javascript" src="svg.min.js"></script>
+      <script type="text/javascript" src="pipeline.js">
+         // document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      </script>
+   </body>
+</html>

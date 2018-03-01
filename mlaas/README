@@ -1,0 +1,22 @@
+# Machine Learning as a Service prototype
+
+- tensorflow model compiler
+   - model design visualization
+   - tensorflow code generation
+
+```
+virtual env
+source env/bin/activate
+pip install -r server/requirements.txt
+cd server
+python app.py
+```
+
+```
+open http://127.0.0.1:9090
+
+- select input: xor
+- create 2 hidden layers: (tanh, 4, 0.03):update, (tanh, 2, 0.03):update
+- select output: run
+  - in a few seconds, result returns
+```

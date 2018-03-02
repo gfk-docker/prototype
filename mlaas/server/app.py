@@ -1,7 +1,9 @@
 from tornado import websocket, web, ioloop
 import json
 import subprocess
+
 from tfcompile import NeuralNetworkGenerator
+import number_extractor
 
 class IndexHandler(web.RequestHandler):
     def get(self):
@@ -10,6 +12,10 @@ class IndexHandler(web.RequestHandler):
 class StaticHandler(web.RequestHandler):
     def get(self, filename):
         self.render("../client/{}".format(filename))
+
+class ServerStaticHandler(web.RequestHandler):
+    def get(self, filename):
+        self.render("./{}".format(filename))
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -49,6 +55,18 @@ class ApiHandler(web.RequestHandler):
         self.write(json.dumps(txt.split('\n')))
         self.finish()
 
+class NumberExtractHandler(web.RequestHandler):
+
+    @web.asynchronous
+    def get(self, *args):
+        self.finish()
+
+    @web.asynchronous
+    def post(self):
+        numbers = number_extractor.parse('./test.py')
+        self.write(json.dumps(numbers))
+        self.finish()
+
 app = web.Application([
     (r'/', IndexHandler),
     (r'/ws', SocketHandler),
@@ -56,6 +74,11 @@ app = web.Application([
     (r'/(pipeline.js)', StaticHandler),
     (r'/(svg.min.js)', StaticHandler),
     (r'/(bootstrap.min.css)', StaticHandler),
+
+    (r'/(efficiency.html)', StaticHandler),
+    (r'/extract', NumberExtractHandler),
+    (r'/(efficiency.js)', StaticHandler),
+    (r'/(test.py)', ServerStaticHandler),
 ])
 
 if __name__ == '__main__':

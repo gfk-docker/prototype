@@ -1,0 +1,5 @@
+switch='br0'
+eth=$1
+ip addr flush dev $eth
+ip link set $eth down
+/root/openvswitch-2.5.0/bin/ovs-vsctl del-port $switch $eth

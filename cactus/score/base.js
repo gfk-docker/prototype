@@ -6,6 +6,7 @@ function score(engine, tokens, doc_set) {
       let docobj = engine.document[doc_id];
       let doc_term_n = Object.values(docobj.tf_vector).reduce((x,y) => x+y); /* not used */
       let result = tokens.map((term_id) => {
+         if (!docobj.tf_vector[term_id]) return 0;
          let value = (
             (1+Math.log(docobj.tf_vector[term_id])) *
             Math.log(doc_n/engine.dictionary[term_id].df)

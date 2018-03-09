@@ -35,7 +35,7 @@ function readEngine(dir) {
    let engine = createEngine();
    engine.dictionary = readDictionary(dir);
    engine.document = readDocument(dir);
-   engine.reverse_index = readDocument(dir);
+   engine.reverse_index = readReverseIndex(dir);
    engine.term_auto_id = 1;
    engine.doc_auto_id = 1;
    engine.term_id_map = {};
